@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TeamTasker Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="dashx-body">
+  <div class="dashx-wrapper">
+    <header class="dashx-header">
+      <h1 class="dashx-title">👋 Hello, User!</h1>
+      <button class="dashx-logout" onclick="logout()"><i data-lucide="log-out"></i> Logout</button>
+    </header>
+
+    <main class="dashx-main">
+      <!-- Individual Task Section -->
+      <section class="dashx-card glass dashx-addtask">
+        <h2>Add New Task (Personal)</h2>
+        <form id="taskForm" class="dashx-form">
+          <input type="text" id="taskTitle" placeholder="Enter Task Title" required />
+          <textarea id="taskDescription" placeholder="Task Details" required></textarea>
+          <input type="date" id="taskDate" required />
+          <input type="time" id="taskTime" required />
+          <button type="submit"><i data-lucide="plus-circle"></i> Add Task</button>
+        </form>
+      </section>
+
+      <section class="dashx-card glass dashx-tasks">
+        <h2>Your Tasks</h2>
+        <ul id="taskList" class="dashx-task-list">
+          <!-- Tasks appear here -->
+        </ul>
+      </section>
+
+      <!-- Team Tasks Section -->
+      <section class="dashx-card glass dashx-team">
+        <h2>Team Tasks (Manager Only)</h2>
+        <form id="teamTaskForm" class="dashx-form">
+          <input type="text" id="teamTaskTitle" placeholder="Task Title" required />
+          <textarea id="teamTaskDescription" placeholder="Description" required></textarea>
+          <input type="text" id="assignee" placeholder="Assign to (Employee Name)" required />
+          <input type="date" id="teamTaskDate" required />
+          <input type="time" id="teamTaskTime" required />
+          <button type="submit"><i data-lucide="users"></i> Assign Task</button>
+        </form>
+
+        <ul id="teamTaskList" class="dashx-task-list">
+          <!-- Team tasks appear here -->
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+
+   // Save Task to DB
+async function saveTaskToDB(task) {
+  const userId = localStorage.getItem("userId"); // Assuming userId is stored after login
+  const taskData = {
+    user_id: userId,
+    title: task.title,
+    description: task.description || "",
+    date: task.date,
+    time: task.time,
+  };
+
+  const response = await fetch("http://localhost:8000/add-task", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(taskData)
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+
+// Load Tasks from DB
+async function loadTasksFromDB() {
+  const userId = localStorage.getItem("userId"); // Assuming userId is stored in localStorage
+  const response = await fetch(`http://localhost:8000/get-tasks/${userId}`);
+  const tasks = await response.json();
+
+  tasks.forEach(task => {
+    addTaskToDOM(task); // Your existing function to show task in the UI
+    scheduleReminders(task); // Schedule notifications for the loaded task
+  });
+}
+
+
+
+    taskForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const title = document.getElementById("taskTitle").value;
+  const description = document.getElementById("taskDescription").value;
+  const date = document.getElementById("taskDate").value;
+  const time = document.getElementById("taskTime").value; // Assuming you have a time input for tasks
+
+  const task = { title, description, date, time };
+  tasks.push(task);
+
+  renderTasks();
+  scheduleReminders(task); // Schedule reminders for the task
+  
+  saveTaskToDB(task);
+
+  taskForm.reset();
+});
+  
+
+function scheduleReminders(task) {
+  const currentTime = new Date();
+  const taskDeadline = new Date(task.date + " " + task.time); // Assume task.date and task.time are in correct formats
+  const totalDuration = (taskDeadline - currentTime) / (1000 * 60 * 60); // Duration in hours
+
+  let reminderInterval = 0;
+  
+  if (totalDuration > 0) {
+    // Schedule reminders
+    if (totalDuration <= 24) {
+      reminderInterval = 2; // Every 2 hours for tasks < 24 hours
+    } else {
+      reminderInterval = 4; // Every 4 hours for tasks > 24 hours
+    }
+
+    const numberOfReminders = Math.floor(totalDuration / reminderInterval);
+
+    for (let i = 1; i <= numberOfReminders; i++) {
+      const reminderTime = new Date(taskDeadline.getTime() - i * reminderInterval * 60 * 60 * 1000);
+      setReminder(reminderTime, task, i);
+    }
+  }
+}
+
+function setReminder(reminderTime, task, reminderCount) {
+  const currentTime = new Date();
+  const timeDifference = reminderTime - currentTime;
+  
+  if (timeDifference > 0) {
+    setTimeout(() => {
+      showReminder(task, reminderCount);
+    }, timeDifference);
+  }
+}
+
+function showReminder(task, reminderCount) {
+  const notification = new Notification(`Reminder for ${task.title}`, {
+    body: `You have ${task.title} due soon! Reminder #${reminderCount}`,
+    icon: '/path/to/icon.png',
+  });
+  
+  setTimeout(() => notification.close(), 5000); // Close after 5 seconds
+}
+
+
+
+    lucide.createIcons();
+    document.addEventListener("DOMContentLoaded", () => {
+    
+        if (Notification.permission !== "granted") {
+  Notification.requestPermission().then(permission => {
+    if (permission !== "granted") {
+      alert("Please enable notifications to receive reminders.");
+    }
+  });
+}
+    
+
+      gsap.from(".dashx-title", { y: -50, opacity: 0, duration: 1 });
+      gsap.from(".dashx-addtask", { x: -100, opacity: 0, duration: 1, delay: 0.4 });
+      gsap.from(".dashx-tasks", { x: 100, opacity: 0, duration: 1, delay: 0.4 });
+      gsap.from(".dashx-team", { y: 100, opacity: 0, duration: 1, delay: 0.6 });
+
+      const taskForm = document.getElementById("taskForm");
+      const taskList = document.getElementById("taskList");
+      const teamTaskForm = document.getElementById("teamTaskForm");
+      const teamTaskList = document.getElementById("teamTaskList");
+
+      let tasks = [];
+      let teamTasks = [];
+
+      function renderTasks() {
+        taskList.innerHTML = "";
+        tasks.forEach((task, index) => {
+          const li = document.createElement("li");
+          li.classList.add("dashx-task-card");
+          li.innerHTML = `
+            <div class="dashx-task-header">
+              <h3>${task.title}</h3>
+              <span>${task.date} ${task.time}</span>
+            </div>
+            <p>${task.description}</p>
+            <div class="dashx-task-actions">
+              <button onclick="editTask(${index})"><i data-lucide="edit-3"></i> Edit</button>
+              <button onclick="deleteTask(${index})"><i data-lucide="trash-2"></i> Delete</button>
+            </div>
+          `;
+          taskList.appendChild(li);
+          lucide.createIcons();
+        });
+      }
+      loadTasksFromDB();
+      function renderTeamTasks() {
+        teamTaskList.innerHTML = "";
+        teamTasks.forEach((task, index) => {
+          const li = document.createElement("li");
+          li.classList.add("dashx-task-card");
+          li.innerHTML = `
+            <div class="dashx-task-header">
+              <h3>${task.title} (👤 ${task.assignee})</h3>
+              <span>${task.date} ${task.time}</span>
+            </div>
+            <p>${task.description}</p>
+            <div class="dashx-task-actions">
+              <button onclick="deleteTeamTask(${index})"><i data-lucide="trash-2"></i> Remove</button>
+            </div>
+          `;
+          teamTaskList.appendChild(li);
+          lucide.createIcons();
+        });
+      }
+
+      taskForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const title = document.getElementById("taskTitle").value;
+        const description = document.getElementById("taskDescription").value;
+        const date = document.getElementById("taskDate").value;
+        const time = document.getElementById("taskTime").value;
+
+        tasks.push({ title, description, date, time });
+        renderTasks();
+        taskForm.reset();
+      });
+
+      teamTaskForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const title = document.getElementById("teamTaskTitle").value;
+        const description = document.getElementById("teamTaskDescription").value;
+        const assignee = document.getElementById("assignee").value;
+        const date = document.getElementById("teamTaskDate").value;
+        const time = document.getElementById("teamTaskTime").value;
+
+        teamTasks.push({ title, description, assignee, date, time });
+        scheduleReminder({ title, description, date, time });
+
+        renderTeamTasks();
+        teamTaskForm.reset();
+      });
+
+      window.deleteTask = function(index) {
+        tasks.splice(index, 1);
+        renderTasks();
+      };
+
+      window.editTask = function(index) {
+        const task = tasks[index];
+        document.getElementById("taskTitle").value = task.title;
+        document.getElementById("taskDescription").value = task.description;
+        document.getElementById("taskDate").value = task.date;
+        document.getElementById("taskTime").value = task.time;
+        tasks.splice(index, 1);
+        renderTasks();
+      };
+
+      window.deleteTeamTask = function(index) {
+        teamTasks.splice(index, 1);
+        renderTeamTasks();
+      };
+
+      function scheduleReminder(task) {
+  const now = new Date();
+  const dueDate = new Date(`${task.date}T${task.time}`);
+  const totalTimeMs = dueDate - now;
+
+  if (totalTimeMs <= 0) return; // Already past
+
+  const reminderCount = totalTimeMs > 8 * 60 * 60 * 1000 ? 6 : 4;
+  const interval = totalTimeMs / reminderCount;
+
+  for (let i = 1; i <= reminderCount; i++) {
+    setTimeout(() => {
+      if (Notification.permission === "granted") {
+        new Notification(`⏰ Reminder: ${task.title}`, {
+          body: `${task.description}\nDue at: ${task.date} ${task.time}`,
+        });
+      }
+    }, interval * i);
+  }
+}
+
+
+
+      window.logout = function() {
+        alert("Logged out successfully!");
+        window.location.href = "index.html";
+      };
+    });
+  </script>
+</body>
+</html>

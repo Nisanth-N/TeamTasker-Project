@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TeamTasker - Task Management</title>
+
+  <!-- ✅ CSS Files -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- ✅ GSAP for Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!-- ✅ AOS for Scroll Animations -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body class="index-page">
+
+  <!-- ✅ Navigation Bar -->
+  <nav>
+    <div class="logo">
+      <img src="images/TeamTaskerLogo.png" alt="TeamTasker Logo" />
+      <span>TeamTasker</span>
+    </div>
+
+    <!-- ✅ Floating Login Modal -->
+    <div id="login-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('login-modal')">&times;</span>
+        <h2>Login</h2>
+        <form>
+          <input type="text" placeholder="Username" required />
+          <input type="password" placeholder="Password" required />
+          <button type="submit">Login</button>
+        </form>
+        <p>
+          Don't have an account?
+          <a href="#" onclick="switchModal('login-modal', 'signup-modal')">Sign Up</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- ✅ Floating Signup Modal -->
+    <div id="signup-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('signup-modal')">&times;</span>
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+          <input type="text" id="signup-username" placeholder="Username" required />
+          <input type="email" id="signup-email" placeholder="Email" required />
+          <input type="password" id="signup-password" placeholder="Password" required />
+          <button type="submit">Sign Up</button>
+        </form>
+        <p>
+          Already have an account?
+          <a href="#" onclick="switchModal('signup-modal', 'login-modal')">Login</a>
+        </p>
+      </div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ✅ Hero Section -->
+  <header class="hero" data-aos="fade-up">
+    <h1>Organize. Plan. Achieve</h1>
+    <p>Manage tasks efficiently, whether you're a student, individual, or a team.</p>
+    <button onclick="startApp()">Get Started</button>
+  </header>
+
+  <!-- ✅ Features Section -->
+  <section class="features">
+    <div class="feature-card" data-aos="fade-right">
+      <img src="images/student.png" alt="Student Icon" />
+      <h3>For Students 📚</h3>
+      <p>Set study goals and receive daily reminders to stay on track.</p>
+    </div>
+    <div class="feature-card" data-aos="fade-left">
+      <img src="images/individual.png" alt="Individual Icon" />
+      <h3>For Individuals 🏆</h3>
+      <p>Plan daily tasks and receive timely notifications to enhance productivity.</p>
+    </div>
+    <div class="feature-card" data-aos="fade-right">
+      <img src="images/team.png" alt="Team Icon" />
+      <h3>For Teams & Companies 👥</h3>
+      <p>Managers can assign tasks, and employees receive daily updates.</p>
+    </div>
+  </section>
+
+  <!-- ✅ Hidden Dashboard (after signup) -->
+  <section id="dashboard" style="display: none;">
+    <h2>Welcome to TeamTasker Dashboard 🎉</h2>
+    <p>Here you can manage tasks, set reminders, and collaborate with your team.</p>
+  </section>
+
+  <!-- ✅ JS Scripts -->
+  <script src="script.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      gsap.from(".hero h1", { opacity: 0, y: -50, duration: 1.5, ease: "power2.out" });
+      gsap.from(".hero p", { opacity: 0, y: -30, duration: 1.5, delay: 0.3 });
+      AOS.init();
+
+      // ✅ Signup form handling
+      const signupForm = document.getElementById("signupForm");
+      if (signupForm) {
+        signupForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const userData = {
+            username: document.getElementById("signup-username").value,
+            email: document.getElementById("signup-email").value,
+            password: document.getElementById("signup-password").value,
+          };
+
+          try {
+            const response = await fetch("http://127.0.0.1:8000/auth/signup", {
+                method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            });
+
+            const result = await response.json();
+            console.log("Server response:", result);
+
+            if (response.ok) {
+              alert("✅ Signup successful!");
+              document.getElementById("signupForm").reset();
+              document.getElementById("signup-modal").style.display = "none";
+              document.getElementById("dashboard").style.display = "block";
+            } else {
+              alert("❌ " + result.detail);
+            }
+
+          } catch (error) {
+            console.error("🚨 Error:", error);
+            alert("Something went wrong!");
+          }
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

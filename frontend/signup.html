@@ -1,0 +1,46 @@
+<form id="signupForm">
+  <input type="text" id="username" placeholder="Username" required />
+  <input type="email" id="email" placeholder="Email" required />
+  <input type="password" id="password" placeholder="Password" required />
+  <button type="submit">Sign Up</button>
+</form>
+
+<script>
+  console.log("Signup script loaded");
+
+  document.getElementById("signupForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const userData = {
+      username: document.getElementById("username").value,
+      email: document.getElementById("email").value,
+      password: document.getElementById("password").value,
+    };
+
+    console.log("Submitting form...");
+    console.log("User Data:", userData);
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
+
+      console.log("Raw response:", response);
+
+      const result = await response.json();
+      console.log("Server response:", result);
+
+      if (response.ok) {
+        alert("✅ Signup Successful!");
+        window.location.href = "index.html"; // 🔁 Redirect to home/login page
+      } else {
+        alert("❌ " + result.detail);
+      }
+    } catch (error) {
+      console.error("🚨 Fetch error:", error);
+      alert("Something went wrong. Check console for details.");
+    }
+  });
+</script>

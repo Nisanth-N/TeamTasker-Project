@@ -1,0 +1,974 @@
+/* ✅ Reset and General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: url('images/background.jpg') no-repeat center center/cover;
+    color: black;
+    text-align: center;
+    overflow-x: hidden; /* ✅ Fixes right-side cut-off issue */
+}
+
+/* ✅ Background for Index Page */
+.index-page {
+    background: linear-gradient(to bottom right, #1e3c72, #2a5298); /* Dark blue gradient */
+    min-height: 100vh;
+    color: white;
+    padding-top: 100px;
+    text-align: center;
+}
+
+/* ✅ Ensure text remains visible */
+.hero h1,
+.hero p {
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+
+/* ✅ Navbar Styling */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(34, 34, 34, 0.9);
+    padding: 15px 30px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.logo span {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    transition: 0.3s;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background: #ff7f50;
+    color: #222;
+}
+
+/* ✅ Adjusted spacing so content isn’t hidden behind navbar */
+.hero {
+    margin-top: 120px;
+    padding: 50px 20px;
+}
+.hero h1 {
+    color: black !important; /* Force pure black */
+    font-weight: bold;
+    font-size: 3rem; /* Adjust size */
+    text-shadow: none !important; /* Remove any dim effects */
+    background: none !important;
+    filter: brightness(1) contrast(1) !important;
+    opacity: 1 !important;
+}
+
+
+.hero p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* ✅ Get Started Button */
+button {
+    padding: 12px 24px;
+    font-size: 18px;
+    background: #ff7f50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 15px;
+}
+
+button:hover {
+    background: #ff4500;
+}
+
+/* ✅ Features Section */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: scale(1.05);
+}
+
+.feature-card img {
+    width: 60px;
+    margin-bottom: 10px;
+}
+
+/* ✅ Responsive Fixes */
+@media (max-width: 768px) {
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero {
+        padding: 80px 20px;
+    }
+}
+
+/* ✅ About Page Styling */
+.about-section {
+    text-align: center;
+    padding: 100px 20px;
+    background: white;
+}
+
+.about-section h1 {
+    font-size: 2.8rem;
+    color: #222;
+    font-weight: bold;
+}
+
+/* ✅ Smooth Text Animation */
+.animate-text {
+    font-size: 1.8rem;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.animate-text:hover {
+    transform: scale(1.1);
+    color: #ff7f50;
+}
+
+/* ✅ General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('images/background.jpg') no-repeat center center/cover;
+    color: black;
+    text-align: center;
+}
+
+/* ✅ Navigation Bar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(34, 34, 34, 0.9);
+    padding: 15px 30px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.logo span {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    transition: 0.3s;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background: #ff7f50;
+    color: #222;
+}
+
+/* ✅ About Page Styling */
+.about {
+    padding: 120px 20px 40px;
+    text-align: center;
+}
+
+/* Add spacing after headings */
+.about h1, .about h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;  /* Adds line spacing */
+}
+
+/* ✅ Mission & Vision Boxes */
+.mission-vision-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.mission-box, .vision-box {
+    width: 280px;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    transition: 0.3s ease-in-out;
+}
+
+.mission-box {
+    background: #4CAF50; /* Green */
+}
+
+.vision-box {
+    background: #2196F3; /* Blue */
+}
+
+.mission-box:hover, .vision-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mission-box h2, .vision-box h2 {
+    margin-bottom: 10px;
+}
+
+/* ✅ Additional Features */
+.about-content {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.about-box {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+    width: 280px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.about-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ✅ Features Page Styling */
+.features-page {
+    padding: 120px 20px 40px;
+    text-align: center;
+}
+
+.features-heading {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.features-desc {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+/* ✅ Features Page Styling */
+.features-page {
+    padding: 120px 20px 40px;
+    text-align: center;
+    background: linear-gradient(to bottom right, #ff7e5f, #feb47b);
+    min-height: 100vh;
+    color: white;
+}
+
+.features-heading {
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.features-desc {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #fefefe;
+    font-weight: 500;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* ✅ Feature Cards */
+.feature-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 25px;
+    border-radius: 12px;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: slideUp 1s ease-in-out;
+}
+
+.feature-card:hover {
+    transform: scale(1.08);
+    box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.feature-card h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: #fff;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.feature-card p {
+    font-size: 16px;
+    color: #f1f1f1;
+}
+
+/* ✅ Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ✅ "See More Features" Button */
+.more-features-btn {
+    margin-top: 30px;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    background: white;
+    color: #ff7e5f;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.more-features-btn:hover {
+    background: #feb47b;
+    color: white;
+    transform: scale(1.05);
+}
+
+
+/* ✅ Modal Background */
+/* ✅ Make sure modal is completely hidden at the start */
+/* ✅ Make sure modal is completely hidden at the start */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+/* ✅ Modal Content */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ Close Button */
+.close-btn {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* ✅ Form Styling */
+.modal-content form input {
+    width: 90%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal-content form button {
+    width: 100%;
+    padding: 10px;
+    background: #ff7f50;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.modal-content form button:hover {
+    background: #ff5722;
+}
+
+.modal-content p {
+    margin-top: 10px;
+}
+
+
+/* ✅ Fix Navigation Bar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(34, 34, 34, 0.9);
+    padding: 15px 30px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover, 
+nav ul li a.active {
+    background: #ff7f50;
+    color: black;
+}
+
+/* ✅ Fix Contact Section Alignment */
+.contact-section {
+    text-align: center;
+    padding: 120px 20px 80px; /* Adjusted padding so it doesn't overlap navbar */
+    background: #ffffff;
+    color: #222;
+}
+
+.contact-section h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+/* ✅ Fix Form Alignment */
+.contact-form {
+    max-width: 500px;
+    margin: 20px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form label {
+    font-size: 16px;
+    color: #444;
+    display: block;
+    text-align: left;
+    margin-top: 10px; /* ✅ Added line breaks */
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px; /* ✅ Adds space between inputs */
+}
+
+.contact-form textarea {
+    height: 100px;
+    resize: none;
+}
+
+.contact-form button {
+    background: #ff7f50;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.contact-form button:hover {
+    background: #ff5722;
+}
+
+/* ✅ Add Some Animations */
+.contact-section {
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ✅ Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* ✅ Modal Box */
+.modal-content {
+    background: white;
+    padding: 20px;
+    width: 350px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+/* ✅ Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* ✅ Inputs */
+.modal-content input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* ✅ Buttons */
+.modal-content button {
+    background: #ff7f50;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ✅ Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ✅ General Navigation Bar (Keeps the original navbar for all pages) */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(34, 34, 34, 0.9); /* Original navbar color */
+    padding: 15px 30px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* ✅ Dashboard-specific Navigation Bar */
+.dashboard nav {
+    background: #ff7f50; /* Different color for dashboard */
+}
+
+/* ✅ Logo */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px; 
+    margin-right: 10px;
+}
+
+.logo span {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* ✅ Navigation Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    transition: 0.3s;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background: #ff7f50;
+    color: #222;
+}
+
+/* ✅ Keep the Original Navbar Style */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(34, 34, 34, 0.9); /* Original navbar color */
+    padding: 15px 30px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* ✅ Apply Different Color ONLY for Dashboard */
+.dashboard nav {
+    background: #ff7f50; /* New color for dashboard navbar */
+}
+
+
+/* 🌈 Stylish Dashboard with Glassmorphism - Custom Prefix: dashx */
+
+.dashx-body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #a1c4fd, #c2e9fb);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+  
+  .dashx-wrapper {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .dashx-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  
+  .dashx-title {
+    font-size: 2.2rem;
+    color: #fff;
+  }
+  
+  .dashx-logout {
+    background: #ff4b5c;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+  }
+  
+  .dashx-logout:hover {
+    background: #ff1e38;
+  }
+  
+  .dashx-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  
+  .dashx-card {
+    padding: 30px;
+    border-radius: 20px;
+  }
+  
+  .glass {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  
+  .dashx-form input,
+  .dashx-form textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+  }
+  
+  .dashx-form button {
+    margin-top: 10px;
+    background: #5cdb95;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s ease;
+  }
+  
+  .dashx-form button:hover {
+    background: #45c287;
+  }
+  
+  .dashx-task-list {
+    list-style: none;
+    padding: 0;
+    max-height: 450px;
+    overflow-y: auto;
+  }
+  
+  .dashx-task-card {
+    background: rgba(255,255,255,0.8);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+  }
+  
+  .dashx-task-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .dashx-task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .dashx-task-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .dashx-task-card p {
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  .dashx-task-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .dashx-task-actions button {
+    background-color: #2196f3;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    transition: 0.3s;
+  }
+  
+  .dashx-task-actions button:hover {
+    background-color: #0b7dda;
+  }
+  
+
+  .datetime-container {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background: #e3f2fd;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInTime 1.5s ease-in-out;
+  }
+  
+  .current-date {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0d47a1;
+  }
+  
+  .current-time {
+    font-size: 18px;
+    color: #1565c0;
+  }
+  
+  @keyframes fadeInTime {
+    from {
+      transform: translateY(-10px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .dashx-form input[type="time"] {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+  }
+  
+  .dashx-team {
+    margin-top: 2rem;
+  }
+  
+  .dashx-team h2 {
+    color: #202020;
+    margin-bottom: 1rem;
+  }
+  
+  .dashx-form input[type="text"],
+  .dashx-form textarea {
+    margin-bottom: 10px;
+  }
+  
+  .dashx-task-header span {
+    font-size: 0.9rem;
+    color: #666;
+  } 
+  

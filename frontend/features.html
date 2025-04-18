@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamTasker - Features</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+</head>
+<body>
+    <!-- ✅ Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <img src="images/TeamTaskerLogo.png" alt="TeamTasker Logo">
+            <span>TeamTasker</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ✅ Features Section -->
+    <section class="features-page">
+        <h1 class="features-heading" data-aos="fade-down">Why Choose TeamTasker?</h1>
+        <p class="features-desc" data-aos="fade-up">Boost your productivity with smart task management.</p>
+
+        <div class="feature-container">
+            <div class="feature-card" data-aos="fade-right">
+                <h2>📅 Task Reminders</h2>
+                <p>Never miss an important task with automatic daily reminders.</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up">
+                <h2>🤝 Collaboration</h2>
+                <p>Work with teams, assign tasks, and track progress together.</p>
+            </div>
+            <div class="feature-card" data-aos="fade-left">
+                <h2>🔔 Customizable Alerts</h2>
+                <p>Get notifications tailored to your personal or work needs.</p>
+            </div>
+        </div>
+
+        <!-- ✅ More Features Button -->
+        <button class="more-features-btn" onclick="alert('More features coming soon!')">See More Features</button>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            AOS.init();
+        });
+    </script>
+</body>
+</html>
